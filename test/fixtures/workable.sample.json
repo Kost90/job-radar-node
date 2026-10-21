@@ -1,0 +1,66 @@
+{
+  "name": "Perlego",
+  "description": "<p>Making learning accessible to all</p>",
+  "jobs": [
+    {
+      "title": "Cloud Infrastructure Engineer",
+      "shortcode": "ABF0A5F0EE",
+      "code": "",
+      "employment_type": "Full-time",
+      "telecommuting": true,
+      "department": "Engineering",
+      "url": "https://apply.workable.com/j/ABF0A5F0EE",
+      "shortlink": "https://apply.workable.com/j/ABF0A5F0EE",
+      "application_url": "https://apply.workable.com/j/ABF0A5F0EE/apply",
+      "published_on": "2026-06-17",
+      "created_at": "2026-06-17",
+      "country": "United Kingdom",
+      "city": "",
+      "state": "",
+      "education": "",
+      "experience": "Mid-Senior level",
+      "function": "Engineering",
+      "industry": "Education Management",
+      "locations": [
+        {
+          "country": "United Kingdom",
+          "countryCode": "GB",
+          "city": "",
+          "region": null,
+          "hidden": false
+        }
+      ],
+      "description": "<p><strong>What we do</strong></p><p>At Perlego, we are working hard to make education accessible to all. In this digital age, we believe that anyone should be able to learn anything at any time. Knowledge should be more accessible, not locked behind sky-high price tags.</p><p>Over the past 9 years, our goal has been to support students across the UK &amp; Europe to access quality books. Our ambition is to expand our support to students globally, specifically looking at the US, and build a product that goes beyond the book, a platform that helps students study smarter and more effectively.</p><p><strong>What we're looking for:</strong></p><p>We are looking for an experienced&nbsp;<strong>Cloud Infrastructure Engineer</strong>&nbsp;with a strong background in AWS services and monitoring tools. In this role, you will ensure the availability and reliability of our services. You will be integral to swiftly addressing issues, resolving incidents independently, and thriving in a fast-paced environment.</p><p></p><p><strong>What you’ll do:</strong></p><p>As a&nbsp;<strong>Cloud Infrastructure Engineer</strong>, your main focus will be to ensure our services remain highly available and performant. Key responsibilities include:</p><p></p><p><strong>Cloud Infrastructure Management:</strong></p><ul><li>Manage and support&nbsp;<strong>AWS infrastructure</strong>, focusing on scalability, security, and reliability.</li><li>Handle deployments, managing&nbsp;<strong>CI/CD pipelines</strong>&nbsp;for both containerised (Docker/ECS) and serverless (AWS Lambda) applications.</li><li>Own infrastructure as code — provisioning resources declaratively so environments are reproducible, version-controlled, and safe to change.</li><li>Ensure effective backup, recovery, and disaster recovery strategies to minimise downtime.</li><li>Manage operational and analytical data stores (Aurora MySQL, DynamoDB)</li><li>Drive cost optimization across the infrastructure — monitoring spend, eliminating waste, and rightsizing resources to balance performance and cost.<br></li></ul><p><strong>Monitoring &amp; Incident Management:</strong></p><ul><li>Monitor and manage platform activity using tools like&nbsp;<strong>Prometheus</strong>,&nbsp;<strong>Grafana</strong>, or&nbsp;<strong>AWS CloudWatch</strong></li><li>Respond quickly to alerts and incidents, independently resolving issues and ensuring service uptime.</li><li>Conduct post-incident reviews and help improve system resiliency through automation and monitoring enhancements.</li><li>Review network activity with AWS Security Hub and Cloudflare<br></li></ul><p><strong>Collaboration &amp; Communication:</strong></p><ul><li>Collaborate with cross-functional teams to implement platform improvements.</li><li>Work independently and make swift decisions when managing service incidents outside core business hours.</li><li>Assist in platform security, ensuring adherence to best practices for cloud security and compliance.<br></li></ul><p><strong>Continuous Improvement:</strong></p><ul><li>Automate manual processes to reduce human error and improve efficiency.</li><li>Continuously enhance monitoring systems, ensuring robust early detection and resolution capabilities.</li><li>Identify potential performance bottlenecks and contribute to overall platform optimisation.</li></ul><p></p><p><strong>Requirements</strong></p><p>This role is ideal for you if you possess:<br></p><ul><li>Experience&nbsp;in Cloud Infrastructure Engineering, DevOps, or a similar field.</li><li>Strong experience with&nbsp;AWS services and containerised applications</li><li>Strong experience operating operational data stores (Aurora MySQL, DynamoDB).</li><li>Expertise in using&nbsp;monitoring tools&nbsp;(e.g. Prometheus, Grafana, CloudWatch) for real-time platform performance insights.</li><li>Strong understanding of network security and Cloudflare , VPC and networking fundamentals, with a clear grasp of how traffic and infrastructure components flow together end to end.</li><li>Hands-on experience with&nbsp;CI/CD&nbsp;pipeline management for deploying containerised (Docker) and serverless applications, preferably with GitHub Actions</li><li>Proficiency in&nbsp;Linux-based operating systems&nbsp;and shell scripting.</li><li>Familiarity with&nbsp;Infrastructure as Code&nbsp;tools (Terraform, CloudFormation).</li><li>Experience with incident management, troubleshooting, and platform recovery in high-pressure environments.</li><li>Strong communication skills with a proven ability to work both independently and collaboratively</li></ul><p></p><p>⭐️&nbsp;It’s a plus if you have:</p><ul><li>Experience working in a global, distributed team providing off-hours support.</li><li>Previous experience with&nbsp;SecOps&nbsp;and cloud security best practices.</li><li>Familiarity with scaling highly available systems in a fast-paced, growth-oriented environment.</li></ul><p><strong>Benefits</strong></p><p><strong>✨ Compensation</strong></p><p>The salary available for this role is £60,000-65,000 dependent upon experience.<br></p><p><strong>🏠 Flexible &amp; Remote-Friendly</strong></p><p>We operate a flexible, remote-first working environment. An office is available if you'd like to work in person, but you're equally welcome to work remotely full-time.</p><p></p><p><strong>🧠 L&amp;D Budget</strong></p><p>We value continuous learning and you will have a personal L&amp;D budget for online courses, subscriptions, or books not on Perlego.</p><p></p><p><strong>🤓 Learning Time</strong></p><p>All employees have dedicated Learning Time to focus on new skills, projects, or interests outside their day-to-day role, including Hackathons.</p><p></p><p><strong>🌴 Work-Life Balance</strong></p><p>22 days annual leave + 1 additional day per year of service</p><p></p><p><strong>❄️ Office Reset</strong></p><p>The days between Boxing Day and New Year off, additional to annual leave.</p><p></p><p><strong>🛐 Flexi Bank Holidays</strong></p><p>Flexibility to swap local bank holidays for religious or cultural days.</p><p></p><p><strong>🗺 Work from overseas</strong></p><p>Flexible short-period remote working overseas, as long as you remain a UK tax resident.</p><p></p><p><strong>🏖 Sabbatical</strong></p><p>1-month unpaid sabbatical after 3 years; 1-month paid sabbatical after 5 years.</p><p></p><p><strong>💛 Personal Days</strong></p><p>1 additional day per year for life events.</p><p></p><p><strong>🍏 Health &amp; Wellbeing</strong></p><p>Private medical, optical and dental insurance via Vitality.</p><p></p><p><strong>🚲 Cycle to Work Scheme</strong></p><p></p><p><strong>🎉 Social</strong></p><p>Regular social events and activities for everyone.</p><p></p><p><strong>🍼 Family time</strong></p><p>Competitive matched parental leave and phased return to work.</p><p></p><p><strong>👼 Workplace Nursery Benefit</strong><br></p>"
+    },
+    {
+      "title": "Product Manager - Platform Experience",
+      "shortcode": "80CA755FF9",
+      "code": "",
+      "employment_type": "Full-time",
+      "telecommuting": false,
+      "department": "Product",
+      "url": "https://apply.workable.com/j/80CA755FF9",
+      "shortlink": "https://apply.workable.com/j/80CA755FF9",
+      "application_url": "https://apply.workable.com/j/80CA755FF9/apply",
+      "published_on": "2026-10-19",
+      "created_at": "2026-09-11",
+      "country": "United Kingdom",
+      "city": "Holborn",
+      "state": "Greater London",
+      "education": "",
+      "experience": "",
+      "function": "Product Management",
+      "industry": "",
+      "locations": [
+        {
+          "country": "United Kingdom",
+          "countryCode": "GB",
+          "city": "Holborn",
+          "region": "Greater London",
+          "hidden": false
+        }
+      ],
+      "description": "<h3>About Perlego</h3><p>Perlego is on a mission to make education accessible to everyone. Dubbed \"The Spotify for Textbooks,\" we give learners worldwide unlimited access to over 1.5 million ebooks and educational resources from 9,000+ leading publishers, and we partner with hundreds of universities, businesses, and training providers to put a library in every learner's pocket. More recently we've expanded beyond the textbook into leisure reading, bringing best-selling fiction, non-fiction, professional and general-interest books onto the same subscription, so the person who came to us for their course reading now has somewhere to go when the term ends. Students, professionals and curious readers in over 100 countries read on Perlego every day, across web, iOS and Android, and the experience they have once they're inside the product is what this role is about.</p><p></p><h3>The role</h3><p>The Platform Experience (PEX) squad is the custodian of the Perlego user experience after a user has signed up. The squad aims to make every user’s experience a delight — whether that be finding their next book, organising their digital bookshelves or reading a book on the Perlego web or mobile eReader.</p><p>As the Product Manager in PEX you’ll be working on bets such as consolidating our book search and recommendations features, developing relevant and useful AI tools for students and overhauling our mobile eReader. You will own the discovery, shaping, proposal and delivery of bets in the Platform Experience squad end to end and you will connect the work to the numbers the squad is judged on.</p><p><strong>Requirements</strong></p><h3><strong>Who y"
+    }
+  ]
+}

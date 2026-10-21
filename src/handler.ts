@@ -1,10 +1,9 @@
-import { greenhouse } from "./ats/greenhouse.ts";
-
-// Runs once per execution environment (cold start), reused by warm invocations.
-const source = greenhouse();
+import { companies } from './config.ts';
+import { sources } from './constants.ts';
+import { crawl } from './crawl.ts';
 
 export const handler = async () => {
-  const jobs = await source.fetchJobs("stripe");
-  console.log(JSON.stringify({ msg: "fetched", count: jobs.length }));
-  return { count: jobs.length };
+  const { jobs, errors } = await crawl(companies, sources);
+  console.log(JSON.stringify({ msg: 'crawl finished', jobs: jobs.length, errors }));
+  return { jobs: jobs.length, errors: errors.length };
 };
