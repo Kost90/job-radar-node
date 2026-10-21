@@ -1,0 +1,16 @@
+{
+  "name": "Example",
+  "jobs": [
+    {
+      "shortcode": "AB12CD34EF",
+      "title": "Node.js Developer",
+      "url": "https://apply.workable.com/j/AB12CD34EF",
+      "telecommuting": false,
+      "city": "Berlin",
+      "state": "",
+      "country": "Germany",
+      "description": "<p>We use <strong>TypeScript</strong> &amp; AWS.</p>",
+      "published_on": "2026-10-05"
+    }
+  ]
+}

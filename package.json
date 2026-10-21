@@ -9,7 +9,9 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "build": "node scripts/build.mjs"
+    "build": "node scripts/build.mjs",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write ."
   },
   "keywords": [],
   "author": "",
@@ -19,9 +21,11 @@
     "node": ">=24"
   },
   "dependencies": {
+    "p-limit": "^7.3.3",
     "zod": "^4.6.7"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.6.2",
     "@types/node": "^26.6.5",
     "esbuild": "^0.28.2",
     "tsx": "^4.23.15",
