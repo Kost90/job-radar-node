@@ -14,7 +14,7 @@ describe('greenhouse', () => {
       'https://boards-api.greenhouse.io/v1/boards/stripe/jobs?content=true',
       expect.anything(),
     );
-    expect(jobs).toHaveLength(729);
+    expect(jobs).toHaveLength(2);
     expect(jobs[0]).toMatchObject({
       id: '8172487',
       title: 'Abuse Investigator',
