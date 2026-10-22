@@ -13,17 +13,8 @@ export interface JobSink {
 export const HEADER = ['Date', 'Id', 'Company', 'Title', 'Location', 'Score', 'URL', 'Source'];
 const ID_COLUMN = 'B';
 
-export function toRow({ job, score }: ScoredJob, now: Date): string[] {
-  return [
-    now.toISOString().slice(0, 10),
-    job.id,
-    job.company,
-    job.title,
-    job.location,
-    String(score),
-    job.url,
-    job.source,
-  ];
+export function toRow({ job, score }: ScoredJob, now: Date): (string | number)[] {
+  return [now.toISOString().slice(0, 10), job.id, job.company, job.title, job.location, score, job.url, job.source];
 }
 
 const API = 'https://sheets.googleapis.com/v4/spreadsheets';
