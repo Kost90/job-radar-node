@@ -1,0 +1,29 @@
+{
+  "titleKeywords": [
+    "node",
+    "typescript",
+    "backend",
+    "back-end",
+    "full stack",
+    "full-stack",
+    "software engineer",
+    "software developer",
+    "Node.js Developer"
+  ],
+  "excludeTitleKeywords": ["intern", "principal", "staff", "director", "manager", "android", "ios"],
+  "skillKeywords": [
+    "node.js",
+    "typescript",
+    "aws",
+    "lambda",
+    "postgres",
+    "terraform",
+    "docker",
+    "react",
+    "angular",
+    "javascript",
+    "node"
+  ],
+  "locations": ["london", "united kingdom", "uk", "europe", "emea"],
+  "minScore": 70
+}
