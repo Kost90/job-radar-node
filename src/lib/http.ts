@@ -1,3 +1,5 @@
+import { setTimeout as delay } from 'node:timers/promises';
+
 export class HttpError extends Error {
   constructor(
     readonly status: number,
@@ -15,17 +17,27 @@ export interface GetJsonOptions {
   signal?: AbortSignal;
   retries?: number; // extra attempts after the first one
   baseDelayMs?: number;
+  maxDelayMs?: number; // don't wait longer than this between attempts
 }
 
 export type FetchFn = typeof fetch;
 
-export const sleep = async (ms: number): Promise<unknown> => new Promise((resolve) => setTimeout(resolve, ms));
+export const sleep = (ms: number, signal?: AbortSignal): Promise<void> => delay(ms, undefined, { signal });
 
-/** Retry only what can succeed next time: 429, 5xx, network errors, our own timeout. */
+/** Retry only what can succeed next time: 408, 429, 5xx, network errors, our own timeout. */
 export function isRetryable(err: unknown): boolean {
-  if (err instanceof HttpError) return err.status === 429 || err.status >= 500;
-  if (err instanceof Error) return err.message === 'TimeoutError' || err.name === 'TypeError';
+  if (err instanceof HttpError) return err.status === 408 || err.status === 429 || err.status >= 500;
+  if (err instanceof Error) return err.name === 'TimeoutError' || err.name === 'TypeError';
   return false;
+}
+
+/** Retry-After is either seconds or an HTTP date. */
+export function parseRetryAfter(value: string | null, now = Date.now()): number | undefined {
+  if (!value) return undefined;
+  const seconds = Number(value);
+  if (Number.isFinite(seconds)) return seconds > 0 ? seconds * 1000 : undefined;
+  const at = Date.parse(value);
+  return Number.isNaN(at) || at <= now ? undefined : at - now;
 }
 
 export async function getJsonOnce(
@@ -43,15 +55,15 @@ export async function getJsonOnce(
   });
 
   if (!res.ok) {
-    const retryAfter = Number(res.headers.get('retry-after'));
-    throw new HttpError(res.status, url, Number.isFinite(retryAfter) && retryAfter > 0 ? retryAfter * 1000 : undefined);
+    await res.body?.cancel().catch(() => {}); // free the connection
+    throw new HttpError(res.status, url, parseRetryAfter(res.headers.get('retry-after')));
   }
 
-  return (await res.json()) as Promise<unknown>;
+  return (await res.json()) as unknown;
 }
 
 export async function getJson(url: string, options: GetJsonOptions = {}): Promise<unknown> {
-  const { retries = 2, baseDelayMs = 500 } = options;
+  const { retries = 2, baseDelayMs = 500, maxDelayMs = 30_000 } = options;
   for (let attempt = 0; ; attempt++) {
     try {
       return await getJsonOnce(url, options);
@@ -59,8 +71,10 @@ export async function getJson(url: string, options: GetJsonOptions = {}): Promis
       if (attempt >= retries || !isRetryable(err) || options.signal?.aborted) throw err;
 
       const backoff = Math.random() * baseDelayMs * 2 ** attempt;
-      const delay = err instanceof HttpError && err.retryAfterMs ? Math.max(err.retryAfterMs, backoff) : backoff;
-      await sleep(delay);
+      const wait = err instanceof HttpError && err.retryAfterMs ? Math.max(err.retryAfterMs, backoff) : backoff;
+      if (wait > maxDelayMs) throw err; // server asks us to wait too long: give up now
+
+      await sleep(wait, options.signal);
     }
   }
 }
