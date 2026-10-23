@@ -15,6 +15,8 @@ const result = await build({
   platform: 'node',
   target: 'node24',
   format: 'esm',
+  // prefer ESM builds (dist-es) over CommonJS (dist-cjs): esbuild can tree-shake them
+  mainFields: ['module', 'main'],
   legalComments: 'none',
   metafile: true,
   // some CommonJS dependencies call require(); give them one inside the ESM bundle
