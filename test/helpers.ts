@@ -8,7 +8,6 @@ export const makeJob = (overrides: Partial<Job> = {}): Job => ({
   location: 'London',
   url: 'https://jobs.example/1',
   description: '',
-  education: '',
   updatedAt: new Date(),
   ...overrides,
 });

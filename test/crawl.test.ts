@@ -10,7 +10,6 @@ const job = (company: string): Job => ({
   location: '',
   url: '',
   description: '',
-  education: '',
   updatedAt: new Date(0),
 });
 

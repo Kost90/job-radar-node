@@ -1,496 +1,153 @@
 [
-  {
-    "ats": "greenhouse",
-    "slug": "stripe"
-  },
-  {
-    "ats": "ashby",
-    "slug": "ashby"
-  },
-  {
-    "ats": "workable",
-    "slug": "huggingface"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "addepar1"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "airbnb"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "anthropic"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "asana"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "braze"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "capitalontap"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "celonis"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "clearstreet"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "cloudflare"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "coinbase"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "contentful"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "databricks"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "datadog"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "deliveroo"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "dojo"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "dropbox"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "ebury"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "elastic"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "elwoodtechnologies"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "epicgames"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "fanaticsfbg"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "figma"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "fivetran"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "gitlab"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "gocardless"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "goodnotes"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "grafanalabs"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "graphcore"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "intercom"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "kaluza"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "launchdarkly"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "liberis"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "mixpanel"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "mongodb"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "monzo"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "okta"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "pagerduty"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "pinterest"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "reddit"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "riotgames"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "robinhood"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "scaleai"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "stabilityai"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "sumup"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "superpayments"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "tines"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "truelayer"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "trustpilot"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "twilio"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "vercel"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "xai"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "isomorphiclabs"
-  },
-  {
-    "ats": "greenhouse",
-    "slug": "gymshark"
-  },
-  {
-    "ats": "ashby",
-    "slug": "Abound"
-  },
-  {
-    "ats": "ashby",
-    "slug": "airtable"
-  },
-  {
-    "ats": "ashby",
-    "slug": "airwallex"
-  },
-  {
-    "ats": "ashby",
-    "slug": "apron"
-  },
-  {
-    "ats": "ashby",
-    "slug": "arq"
-  },
-  {
-    "ats": "ashby",
-    "slug": "axle-careers"
-  },
-  {
-    "ats": "ashby",
-    "slug": "bjakcareer"
-  },
-  {
-    "ats": "ashby",
-    "slug": "bloxd"
-  },
-  {
-    "ats": "ashby",
-    "slug": "checkout.com"
-  },
-  {
-    "ats": "ashby",
-    "slug": "cohere"
-  },
-  {
-    "ats": "ashby",
-    "slug": "cursor"
-  },
-  {
-    "ats": "ashby",
-    "slug": "deel"
-  },
-  {
-    "ats": "ashby",
-    "slug": "deliveroo"
-  },
-  {
-    "ats": "ashby",
-    "slug": "elevenlabs"
-  },
-  {
-    "ats": "ashby",
-    "slug": "faculty"
-  },
-  {
-    "ats": "ashby",
-    "slug": "flock"
-  },
-  {
-    "ats": "ashby",
-    "slug": "fundingcircle"
-  },
-  {
-    "ats": "ashby",
-    "slug": "granular-energy.com"
-  },
-  {
-    "ats": "ashby",
-    "slug": "griffin"
-  },
-  {
-    "ats": "ashby",
-    "slug": "harmonic-security-inc"
-  },
-  {
-    "ats": "ashby",
-    "slug": "hopper"
-  },
-  {
-    "ats": "ashby",
-    "slug": "humaans"
-  },
-  {
-    "ats": "ashby",
-    "slug": "hyperexponential"
-  },
-  {
-    "ats": "ashby",
-    "slug": "incident"
-  },
-  {
-    "ats": "ashby",
-    "slug": "juro"
-  },
-  {
-    "ats": "ashby",
-    "slug": "lendable"
-  },
-  {
-    "ats": "ashby",
-    "slug": "linear"
-  },
-  {
-    "ats": "ashby",
-    "slug": "marshmallow"
-  },
-  {
-    "ats": "ashby",
-    "slug": "mast"
-  },
-  {
-    "ats": "ashby",
-    "slug": "miro"
-  },
-  {
-    "ats": "ashby",
-    "slug": "moneybox"
-  },
-  {
-    "ats": "ashby",
-    "slug": "multiverse"
-  },
-  {
-    "ats": "ashby",
-    "slug": "notion"
-  },
-  {
-    "ats": "ashby",
-    "slug": "openai"
-  },
-  {
-    "ats": "ashby",
-    "slug": "paddle"
-  },
-  {
-    "ats": "ashby",
-    "slug": "pavebank"
-  },
-  {
-    "ats": "ashby",
-    "slug": "platformed"
-  },
-  {
-    "ats": "ashby",
-    "slug": "pleo"
-  },
-  {
-    "ats": "ashby",
-    "slug": "posthog"
-  },
-  {
-    "ats": "ashby",
-    "slug": "quantexa"
-  },
-  {
-    "ats": "ashby",
-    "slug": "ramp"
-  },
-  {
-    "ats": "ashby",
-    "slug": "refractal"
-  },
-  {
-    "ats": "ashby",
-    "slug": "seccl"
-  },
-  {
-    "ats": "ashby",
-    "slug": "socure"
-  },
-  {
-    "ats": "ashby",
-    "slug": "streetgroup"
-  },
-  {
-    "ats": "ashby",
-    "slug": "sweep"
-  },
-  {
-    "ats": "ashby",
-    "slug": "synthesia"
-  },
-  {
-    "ats": "ashby",
-    "slug": "Talos-Trading"
-  },
-  {
-    "ats": "ashby",
-    "slug": "tractable"
-  },
-  {
-    "ats": "ashby",
-    "slug": "transficc"
-  },
-  {
-    "ats": "ashby",
-    "slug": "vanta"
-  },
-  {
-    "ats": "ashby",
-    "slug": "vercel"
-  },
-  {
-    "ats": "ashby",
-    "slug": "wayve"
-  },
-  {
-    "ats": "ashby",
-    "slug": "attio"
-  },
-  {
-    "ats": "workable",
-    "slug": "clearbank"
-  },
-  {
-    "ats": "workable",
-    "slug": "goodlord"
-  },
-  {
-    "ats": "workable",
-    "slug": "landytech"
-  },
-  {
-    "ats": "workable",
-    "slug": "moneybox"
-  },
-  {
-    "ats": "workable",
-    "slug": "mytutor"
-  },
-  {
-    "ats": "workable",
-    "slug": "ravelin"
-  },
-  {
-    "ats": "workable",
-    "slug": "secondnature"
-  },
-  {
-    "ats": "workable",
-    "slug": "soldo"
-  },
-  {
-    "ats": "workable",
-    "slug": "starling-bank"
-  },
-  {
-    "ats": "workable",
-    "slug": "suade"
-  },
-  {
-    "ats": "workable",
-    "slug": "tide"
-  },
-  {
-    "ats": "workable",
-    "slug": "zego"
-  },
-  {
-    "ats": "workable",
-    "slug": "zoopla"
-  },
+  { "ats": "greenhouse", "slug": "stripe" },
+  { "ats": "ashby", "slug": "ashby" },
+  { "ats": "workable", "slug": "huggingface" },
+  { "ats": "greenhouse", "slug": "addepar1" },
+  { "ats": "greenhouse", "slug": "airbnb" },
+  { "ats": "greenhouse", "slug": "anthropic" },
+  { "ats": "greenhouse", "slug": "asana" },
+  { "ats": "greenhouse", "slug": "braze" },
+  { "ats": "greenhouse", "slug": "capitalontap" },
+  { "ats": "greenhouse", "slug": "celonis" },
+  { "ats": "greenhouse", "slug": "clearstreet" },
+  { "ats": "greenhouse", "slug": "cloudflare" },
+  { "ats": "greenhouse", "slug": "coinbase" },
+  { "ats": "greenhouse", "slug": "contentful" },
+  { "ats": "greenhouse", "slug": "databricks" },
+  { "ats": "greenhouse", "slug": "datadog" },
+  { "ats": "greenhouse", "slug": "deliveroo" },
+  { "ats": "greenhouse", "slug": "dojo" },
+  { "ats": "greenhouse", "slug": "dropbox" },
+  { "ats": "greenhouse", "slug": "ebury" },
+  { "ats": "greenhouse", "slug": "elastic" },
+  { "ats": "greenhouse", "slug": "elwoodtechnologies" },
+  { "ats": "greenhouse", "slug": "epicgames" },
+  { "ats": "greenhouse", "slug": "fanaticsfbg" },
+  { "ats": "greenhouse", "slug": "figma" },
+  { "ats": "greenhouse", "slug": "fivetran" },
+  { "ats": "greenhouse", "slug": "gitlab" },
+  { "ats": "greenhouse", "slug": "gocardless" },
+  { "ats": "greenhouse", "slug": "goodnotes" },
+  { "ats": "greenhouse", "slug": "grafanalabs" },
+  { "ats": "greenhouse", "slug": "graphcore" },
+  { "ats": "greenhouse", "slug": "intercom" },
+  { "ats": "greenhouse", "slug": "kaluza" },
+  { "ats": "greenhouse", "slug": "launchdarkly" },
+  { "ats": "greenhouse", "slug": "liberis" },
+  { "ats": "greenhouse", "slug": "mixpanel" },
+  { "ats": "greenhouse", "slug": "mongodb" },
+  { "ats": "greenhouse", "slug": "monzo" },
+  { "ats": "greenhouse", "slug": "okta" },
+  { "ats": "greenhouse", "slug": "pagerduty" },
+  { "ats": "greenhouse", "slug": "pinterest" },
+  { "ats": "greenhouse", "slug": "reddit" },
+  { "ats": "greenhouse", "slug": "riotgames" },
+  { "ats": "greenhouse", "slug": "robinhood" },
+  { "ats": "greenhouse", "slug": "scaleai" },
+  { "ats": "greenhouse", "slug": "stabilityai" },
+  { "ats": "greenhouse", "slug": "sumup" },
+  { "ats": "greenhouse", "slug": "superpayments" },
+  { "ats": "greenhouse", "slug": "tines" },
+  { "ats": "greenhouse", "slug": "truelayer" },
+  { "ats": "greenhouse", "slug": "trustpilot" },
+  { "ats": "greenhouse", "slug": "twilio" },
+  { "ats": "greenhouse", "slug": "vercel" },
+  { "ats": "greenhouse", "slug": "xai" },
+  { "ats": "greenhouse", "slug": "isomorphiclabs" },
+  { "ats": "greenhouse", "slug": "gymshark" },
+  { "ats": "ashby", "slug": "Abound" },
+  { "ats": "ashby", "slug": "airtable" },
+  { "ats": "ashby", "slug": "airwallex" },
+  { "ats": "ashby", "slug": "apron" },
+  { "ats": "ashby", "slug": "arq" },
+  { "ats": "ashby", "slug": "axle-careers" },
+  { "ats": "ashby", "slug": "bjakcareer" },
+  { "ats": "ashby", "slug": "bloxd" },
+  { "ats": "ashby", "slug": "checkout.com" },
+  { "ats": "ashby", "slug": "cohere" },
+  { "ats": "ashby", "slug": "cursor" },
+  { "ats": "ashby", "slug": "deel" },
+  { "ats": "ashby", "slug": "deliveroo" },
+  { "ats": "ashby", "slug": "elevenlabs" },
+  { "ats": "ashby", "slug": "faculty" },
+  { "ats": "ashby", "slug": "flock" },
+  { "ats": "ashby", "slug": "fundingcircle" },
+  { "ats": "ashby", "slug": "granular-energy.com" },
+  { "ats": "ashby", "slug": "griffin" },
+  { "ats": "ashby", "slug": "harmonic-security-inc" },
+  { "ats": "ashby", "slug": "hopper" },
+  { "ats": "ashby", "slug": "humaans" },
+  { "ats": "ashby", "slug": "hyperexponential" },
+  { "ats": "ashby", "slug": "incident" },
+  { "ats": "ashby", "slug": "juro" },
+  { "ats": "ashby", "slug": "lendable" },
+  { "ats": "ashby", "slug": "linear" },
+  { "ats": "ashby", "slug": "marshmallow" },
+  { "ats": "ashby", "slug": "mast" },
+  { "ats": "ashby", "slug": "miro" },
+  { "ats": "ashby", "slug": "moneybox" },
+  { "ats": "ashby", "slug": "multiverse" },
+  { "ats": "ashby", "slug": "notion" },
+  { "ats": "ashby", "slug": "openai" },
+  { "ats": "ashby", "slug": "paddle" },
+  { "ats": "ashby", "slug": "pavebank" },
+  { "ats": "ashby", "slug": "platformed" },
+  { "ats": "ashby", "slug": "pleo" },
+  { "ats": "ashby", "slug": "posthog" },
+  { "ats": "ashby", "slug": "quantexa" },
+  { "ats": "ashby", "slug": "ramp" },
+  { "ats": "ashby", "slug": "refractal" },
+  { "ats": "ashby", "slug": "seccl" },
+  { "ats": "ashby", "slug": "socure" },
+  { "ats": "ashby", "slug": "streetgroup" },
+  { "ats": "ashby", "slug": "sweep" },
+  { "ats": "ashby", "slug": "synthesia" },
+  { "ats": "ashby", "slug": "Talos-Trading" },
+  { "ats": "ashby", "slug": "tractable" },
+  { "ats": "ashby", "slug": "transficc" },
+  { "ats": "ashby", "slug": "vanta" },
+  { "ats": "ashby", "slug": "vercel" },
+  { "ats": "ashby", "slug": "wayve" },
+  { "ats": "ashby", "slug": "attio" },
+  { "ats": "workable", "slug": "clearbank" },
+  { "ats": "workable", "slug": "goodlord" },
+  { "ats": "workable", "slug": "landytech" },
+  { "ats": "workable", "slug": "moneybox" },
+  { "ats": "workable", "slug": "mytutor" },
+  { "ats": "workable", "slug": "ravelin" },
+  { "ats": "workable", "slug": "secondnature" },
+  { "ats": "workable", "slug": "soldo" },
+  { "ats": "workable", "slug": "starling-bank" },
+  { "ats": "workable", "slug": "suade" },
+  { "ats": "workable", "slug": "tide" },
+  { "ats": "workable", "slug": "zego" },
+  { "ats": "workable", "slug": "zoopla" },
+  { "ats": "workable", "slug": "laka" },
+  { "ats": "ashby", "slug": "harvey" },
+  { "ats": "workable", "slug": "legl" },
+  { "ats": "workable", "slug": "avvoka" },
+  { "ats": "workable", "slug": "lexoo" },
+  { "ats": "greenhouse", "slug": "cleo" },
+  { "ats": "workable", "slug": "modulr" },
+  { "ats": "workable", "slug": "emma" },
+  { "ats": "workable", "slug": "moneyhub" },
+  { "ats": "workable", "slug": "zapmap" },
+  { "ats": "workable", "slug": "ohme" },
+  { "ats": "workable", "slug": "zenobe" },
+  { "ats": "greenhouse", "slug": "dialpad" },
+  { "ats": "workable", "slug": "cityfibre" },
+  { "ats": "ashby", "slug": "legora" },
+  { "ats": "ashby", "slug": "lawhive" },
+  { "ats": "workable", "slug": "luminance-1" },
+  { "ats": "ashby", "slug": "legal-500" },
+  { "ats": "workable", "slug": "ki-insurance" },
+  { "ats": "ashby", "slug": "krakentech" },
+  { "ats": "workable", "slug": "habitat-energy" },
+  { "ats": "greenhouse", "slug": "ledgy" },
+  { "ats": "ashby", "slug": "investa" },
+  { "ats": "ashby", "slug": "tradinghub" },
+  { "ats": "greenhouse", "slug": "wolt" },
+  { "ats": "greenhouse", "slug": "ably30" },
   { "ats": "ashby", "slug": "granola" },
   { "ats": "ashby", "slug": "tesslcareers" },
   { "ats": "ashby", "slug": "xyz-reality" },
@@ -500,7 +157,6 @@
   { "ats": "ashby", "slug": "edra" },
   { "ats": "ashby", "slug": "bite" },
   { "ats": "ashby", "slug": "legal-500" },
-  { "ats": "ashby", "slug": "substrate-bio" },
   { "ats": "ashby", "slug": "sierra" },
   { "ats": "greenhouse", "slug": "ably30" },
   { "ats": "greenhouse", "slug": "axon" },
@@ -510,5 +166,17 @@
   { "ats": "workable", "slug": "alto" },
   { "ats": "workable", "slug": "codurance" },
   { "ats": "workable", "slug": "koothjobs" },
-  { "ats": "workable", "slug": "lockwood" }
+  { "ats": "workable", "slug": "lockwood" },
+  { "ats": "ashby", "slug": "cytora.com" },
+  { "ats": "ashby", "slug": "orbital" },
+  { "ats": "workable", "slug": "bloom-and-wild" },
+  { "ats": "ashby", "slug": "oaknorth" },
+  { "ats": "ashby", "slug": "freetrade" },
+  { "ats": "workable", "slug": "yapily" },
+  { "ats": "workable", "slug": "10xbanking" },
+  { "ats": "workable", "slug": "kroo" },
+  { "ats": "workable", "slug": "fuseenergy" },
+  { "ats": "ashby", "slug": "kraken.com" },
+  { "ats": "greenhouse", "slug": "aircallioinc" },
+  { "ats": "greenhouse", "slug": "wirelesslogic" }
 ]

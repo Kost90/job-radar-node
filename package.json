@@ -11,7 +11,8 @@
     "test:watch": "vitest",
     "build": "node scripts/build.mjs",
     "lint": "biome check .",
-    "lint:fix": "biome check --write ."
+    "lint:fix": "biome check --write .",
+    "package": "npm run build && node scripts/package.mjs"
   },
   "keywords": [],
   "author": "",
@@ -21,13 +22,19 @@
     "node": ">=24"
   },
   "dependencies": {
+    "@aws-lambda-powertools/logger": "^2.36.0",
+    "@aws-lambda-powertools/parameters": "^2.36.0",
+    "@aws-sdk/client-dynamodb": "^3.1156.0",
+    "@aws-sdk/client-ssm": "^3.1156.0",
     "p-limit": "^7.3.3",
     "zod": "^4.6.7"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.6.2",
+    "@types/aws-lambda": "^8.10.164",
     "@types/node": "^26.6.5",
     "esbuild": "^0.28.2",
+    "fflate": "^0.8.3",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2",
     "vitest": "^5.0.5"
