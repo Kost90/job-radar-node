@@ -216,6 +216,14 @@
     "slug": "xai"
   },
   {
+    "ats": "greenhouse",
+    "slug": "isomorphiclabs"
+  },
+  {
+    "ats": "greenhouse",
+    "slug": "gymshark"
+  },
+  {
     "ats": "ashby",
     "slug": "Abound"
   },
@@ -428,6 +436,10 @@
     "slug": "wayve"
   },
   {
+    "ats": "ashby",
+    "slug": "attio"
+  },
+  {
     "ats": "workable",
     "slug": "clearbank"
   },
@@ -478,5 +490,25 @@
   {
     "ats": "workable",
     "slug": "zoopla"
-  }
+  },
+  { "ats": "ashby", "slug": "granola" },
+  { "ats": "ashby", "slug": "tesslcareers" },
+  { "ats": "ashby", "slug": "xyz-reality" },
+  { "ats": "ashby", "slug": "fleek" },
+  { "ats": "ashby", "slug": "limbic" },
+  { "ats": "ashby", "slug": "tortus" },
+  { "ats": "ashby", "slug": "edra" },
+  { "ats": "ashby", "slug": "bite" },
+  { "ats": "ashby", "slug": "legal-500" },
+  { "ats": "ashby", "slug": "substrate-bio" },
+  { "ats": "ashby", "slug": "sierra" },
+  { "ats": "greenhouse", "slug": "ably30" },
+  { "ats": "greenhouse", "slug": "axon" },
+  { "ats": "greenhouse", "slug": "flohealth" },
+  { "ats": "workable", "slug": "perlego" },
+  { "ats": "workable", "slug": "our-future-health" },
+  { "ats": "workable", "slug": "alto" },
+  { "ats": "workable", "slug": "codurance" },
+  { "ats": "workable", "slug": "koothjobs" },
+  { "ats": "workable", "slug": "lockwood" }
 ]

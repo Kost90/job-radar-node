@@ -12,7 +12,6 @@ const ResponseSchema = z.object({
       title: z.string(),
       updated_at: z.string(),
       absolute_url: z.string(),
-      education: z.optional(z.string()),
       content: z.optional(z.string()),
       location: z.object({ name: z.string() }),
     }),
@@ -35,7 +34,6 @@ export function greenhouse(fetchFn: FetchFn = fetch): Source {
           location: j.location.name,
           url: j.absolute_url,
           description: htmlToText(j.content ?? ''),
-          education: j.education ?? '',
           updatedAt: new Date(j.updated_at),
         }),
       );

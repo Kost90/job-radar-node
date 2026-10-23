@@ -12,7 +12,6 @@ const ResponseSchema = z.object({
       title: z.string(),
       published_on: z.string(),
       url: z.string(),
-      education: z.optional(z.string()),
       city: z.optional(z.nullable(z.string())),
       state: z.optional(z.nullable(z.string())),
       country: z.optional(z.nullable(z.string())),
@@ -40,7 +39,6 @@ export function workable(fetchFn: FetchFn = fetch): Source {
           location: place || (j.telecommuting ? 'Remote' : ''),
           url: j.url,
           description: htmlToText(j.description ?? ''),
-          education: j.education ?? '',
           updatedAt: new Date(j.published_on ?? 0),
         };
       });

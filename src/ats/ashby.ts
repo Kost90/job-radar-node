@@ -11,7 +11,6 @@ const ResponseSchema = z.object({
       title: z.string(),
       publishedAt: z.string(),
       jobUrl: z.string(),
-      education: z.optional(z.string()),
       location: z.string(),
       isListed: z.optional(z.boolean()),
       descriptionPlain: z.optional(z.nullable(z.string())),
@@ -37,7 +36,6 @@ export function ashby(fetchFn: FetchFn = fetch): Source {
             location: j.location,
             url: j.jobUrl,
             description: j.descriptionPlain ?? '',
-            education: j.education ?? '',
             updatedAt: new Date(j.publishedAt),
           }),
         );

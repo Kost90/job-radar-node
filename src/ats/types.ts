@@ -10,7 +10,7 @@ export interface Job {
   url: string;
   /** exist only in greenhouse and ashby */
   description: string;
-  education: string;
+  // education: string;
   /** use "publishedAt" for ashby and "published_on" for workable */
   updatedAt: Date;
 }
