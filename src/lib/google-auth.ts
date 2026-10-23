@@ -50,3 +50,27 @@ export function googleTokenProvider(key: ServiceAccountKey, scope: string, fetch
     return cached.token;
   };
 }
+
+/**
+ * Like googleTokenProvider, but reads the key on every call (the caller caches it, e.g. Powertools)
+ * and rebuilds the provider when the key changes, so a rotated key needs no redeploy.
+ */
+export function rotatingTokenProvider(
+  readKey: () => Promise<string>,
+  scope: string,
+  fetchFn: FetchFn = fetch,
+): () => Promise<string> {
+  let current: { raw: string; getToken: () => Promise<string> } | undefined;
+
+  return async function getToken() {
+    const raw = await readKey();
+    if (current?.raw !== raw) {
+      // first call or the key was rotated: new provider, new token cache
+      current = {
+        raw,
+        getToken: googleTokenProvider(parseServiceAccountKey(raw), scope, fetchFn),
+      };
+    }
+    return current.getToken();
+  };
+}

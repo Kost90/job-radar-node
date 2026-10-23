@@ -3,12 +3,14 @@ import type { Company } from './config.ts';
 import { type CrawlError, crawl } from './crawl.ts';
 import { matchJob } from './filter.ts';
 import type { Profile } from './profile.ts';
+import type { SeenStore } from './seen.ts';
 import type { JobSink, ScoredJob } from './sheets.ts';
 
 export interface PipelineDeps {
   companies: Company[];
   sources: Record<AtsName, Source>;
   profile: Profile;
+  seen: SeenStore;
   sink: JobSink;
 }
 
@@ -26,23 +28,30 @@ export async function runPipeline(deps: PipelineDeps, { dryRun = false } = {}): 
 
   const matched = jobs.map((job): ScoredJob => ({ job, ...matchJob(job, deps.profile) })).filter((m) => m.match);
 
-  const seen = await deps.sink.existingIds();
-  const fresh: ScoredJob[] = [];
+  // the same posting can be listed twice in one run (e.g. two locations, one URL)
+  const urls = new Set<string>();
+  const candidates: ScoredJob[] = [];
   for (const m of matched) {
-    if (seen.has(m.job.id)) continue;
-    seen.add(m.job.id); // also dedupes the same job listed twice in one run
-    fresh.push(m);
+    if (urls.has(m.job.url)) continue;
+    urls.add(m.job.url);
+    candidates.push(m);
   }
-  fresh.sort((a, b) => b.score - a.score);
+  candidates.sort((a, b) => b.score - a.score);
 
-  if (!dryRun) await deps.sink.append(fresh);
-
-  return {
+  const summary = {
     fetched: jobs.length,
     matched: matched.length,
-    written: dryRun ? 0 : fresh.length,
     dryRun,
-    top: fresh.slice(0, 5),
     errors,
   };
+  if (dryRun) return { ...summary, written: 0, top: candidates.slice(0, 5) };
+
+  const fresh = await deps.seen.claim(candidates);
+  try {
+    await deps.sink.append(fresh);
+  } catch (err) {
+    await deps.seen.release(fresh);
+    throw err;
+  }
+  return { ...summary, written: fresh.length, top: fresh.slice(0, 5) };
 }

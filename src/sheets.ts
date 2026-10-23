@@ -1,4 +1,4 @@
-import * as z from 'zod/mini';
+import { z } from 'zod/mini';
 import type { Job } from './ats/types.ts';
 import type { MatchResult } from './filter.ts';
 import type { FetchFn } from './lib/http.ts';
@@ -6,14 +6,14 @@ import type { FetchFn } from './lib/http.ts';
 export type ScoredJob = { job: Job } & MatchResult;
 
 export interface JobSink {
-  existingIds(): Promise<Set<string>>;
   append(jobs: ScoredJob[]): Promise<void>;
+  existingIds(): Promise<Set<string>>;
 }
 
 const API = 'https://sheets.googleapis.com/v4/spreadsheets';
 
 export const HEADER = ['Date', 'Id', 'Company', 'Title', 'Location', 'Score', 'URL', 'Source'];
-/** Should be change if range of columns in the sheet will be changes*/
+
 const ID_COLUMN = 'B';
 
 export function toRow({ job, score }: ScoredJob, now: Date): (string | number)[] {
@@ -49,11 +49,9 @@ export function sheetsSink(opts: {
       const data = z.object({ values: z.optional(z.array(z.array(z.string()))) }).parse(await call(`${base}/${range}`));
       return new Set((data.values ?? []).map((row) => row[0] ?? '').filter(Boolean));
     },
-
     async append(jobs) {
       if (jobs.length === 0) return;
       const range = encodeURIComponent(`${sheetName}!A1`);
-      // RAW: values are stored as-is. A job title like "=IMPORTXML(...)" stays text, not a formula.
       const url = `${base}/${range}:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS`;
       const date = now();
       await call(url, {
