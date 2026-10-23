@@ -1,5 +1,4 @@
-import { companies } from './config.ts';
-import { sources } from './constants.ts';
+import { companies, sources } from './config.ts';
 import { crawl } from './crawl.ts';
 
 export const handler = async () => {

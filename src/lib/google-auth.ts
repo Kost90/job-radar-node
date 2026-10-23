@@ -31,7 +31,7 @@ export function googleTokenProvider(key: ServiceAccountKey, scope: string, fetch
       scope,
       aud: TOKEN_URL,
       iat: now,
-      exp: now + 3600, // Google allows at most 1 hour
+      exp: now + 3600,
     })}`;
     const signature = createSign('RSA-SHA256').update(unsigned).sign(key.private_key, 'base64url');
 

@@ -1,7 +1,4 @@
-import { ashby } from './ats/ashby.ts';
-import { greenhouse } from './ats/greenhouse.ts';
-import { workable } from './ats/workable.ts';
-import { companies } from './config.ts';
+import { companies, sources } from './config.ts';
 import { googleTokenProvider, parseServiceAccountKey } from './lib/google-auth.ts';
 import { runPipeline } from './pipeline.ts';
 import { profile } from './profile.ts';
@@ -24,7 +21,7 @@ const sink = sheetsSink({
 const summary = await runPipeline(
   {
     companies,
-    sources: { greenhouse: greenhouse(), ashby: ashby(), workable: workable() },
+    sources,
     profile,
     sink,
   },

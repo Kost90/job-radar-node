@@ -30,7 +30,7 @@ export async function crawl(
 
   const result: CrawlResult = { jobs: [], errors: [] };
   for (const [i, outcome] of settled.entries()) {
-    const company = companies[i]; // allSettled keeps the input order
+    const company = companies[i];
     if (!company) continue;
     if (outcome.status === 'fulfilled') result.jobs.push(...outcome.value);
     else result.errors.push({ company, message: String(outcome.reason) });
