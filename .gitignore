@@ -2,3 +2,13 @@ node_modules/
 dist/
 .env
 function.zip
+.build/
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+infra/.build/
+infra/backend.hcl
+infra/terraform.tfvars
+tfplan
