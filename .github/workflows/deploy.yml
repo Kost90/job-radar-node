@@ -1,0 +1,141 @@
+name: deploy
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+# PRs: a newer push cancels the older plan. main: applies queue up and are never cancelled midway.
+concurrency:
+  group: terraform-${{ github.event_name == 'push' && 'apply' || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+defaults:
+  run:
+    shell: bash # explicit bash = -eo pipefail, so `terraform plan | tee` fails when plan fails
+    working-directory: infra
+
+env:
+  TF_IN_AUTOMATION: "true"
+  TF_INPUT: "false"
+  TF_VAR_region: ${{ vars.AWS_REGION }}
+  TF_VAR_spreadsheet_id: ${{ vars.SPREADSHEET_ID }}
+
+jobs:
+  plan:
+    # forks get no OIDC token for this event; skip instead of failing
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # lets the job request an OIDC token, grants nothing else
+      pull-requests: write # to post the plan as a comment
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          package-manager-cache: false # no shared cache in jobs that hold cloud credentials
+
+      - run: npm ci
+        working-directory: .
+      - run: npm run build
+        working-directory: .
+
+      - uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: 1.17.0
+          terraform_wrapper: false
+
+      - uses: aws-actions/configure-aws-credentials@v6
+        with:
+          role-to-assume: ${{ vars.AWS_PLAN_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - run: terraform fmt -check -recursive
+      - run: terraform init -backend-config="bucket=${{ vars.TF_STATE_BUCKET }}"
+      - run: terraform validate
+
+      - name: terraform plan
+        run: terraform plan -lock=false -no-color | tee plan.txt
+
+      - name: Comment the plan on the PR
+        uses: actions/github-script@v9
+        env:
+          PLAN_FILE: infra/plan.txt
+        with:
+          script: |
+            const fs = require('node:fs');
+            const plan = fs.readFileSync(process.env.PLAN_FILE, 'utf8');
+            const summary = plan.match(/^(Plan: .*|No changes\..*)$/m)?.[0] ?? 'see the job log';
+            const marker = '<!-- terraform-plan -->';
+            const text = plan.length > 60000 ? `${plan.slice(-60000)}\n(truncated, full plan in the job log)` : plan;
+            const body = [
+              marker,
+              `### terraform plan: ${summary}`,
+              '<details><summary>Full plan</summary>',
+              '',
+              '```',
+              text,
+              '```',
+              '</details>',
+            ].join('\n');
+            const { owner, repo } = context.repo;
+            const issue_number = context.issue.number;
+            const comments = await github.paginate(github.rest.issues.listComments, { owner, repo, issue_number });
+            const previous = comments.find((c) => c.body?.startsWith(marker));
+            if (previous) {
+              await github.rest.issues.updateComment({ owner, repo, comment_id: previous.id, body });
+            } else {
+              await github.rest.issues.createComment({ owner, repo, issue_number, body });
+            }
+
+  apply:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          package-manager-cache: false
+
+      - run: npm ci
+        working-directory: .
+      # the zip that goes to Lambda is built from exactly the commit that passed these checks
+      - run: npm run typecheck && npm run lint && npm test
+        working-directory: .
+      - run: npm run build
+        working-directory: .
+
+      - uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: 1.17.0
+          terraform_wrapper: false
+
+      - uses: aws-actions/configure-aws-credentials@v6
+        with:
+          role-to-assume: ${{ vars.AWS_APPLY_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - run: terraform init -backend-config="bucket=${{ vars.TF_STATE_BUCKET }}"
+      - run: terraform plan -out=tfplan
+      - run: terraform apply tfplan
+
+      - name: Smoke test
+        run: |
+          aws lambda invoke \
+            --function-name "$(terraform output -raw function_name)" \
+            --cli-binary-format raw-in-base64-out \
+            --payload '{"dryRun": true}' \
+            out.json | tee invoke.json
+          if grep -q FunctionError invoke.json; then cat out.json; exit 1; fi
+          cat out.json

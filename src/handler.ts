@@ -69,7 +69,7 @@ export const handler = async (event: unknown, context: Context) => {
 
   const { fetched, matched, written } = summary;
 
-  logger.info('run finished', {
+  logger.info('run finished (deployed by CI)', {
     fetched,
     matched,
     written,
