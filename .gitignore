@@ -10,5 +10,5 @@ function.zip
 *.tfstate.*
 infra/.build/
 infra/backend.hcl
-infra/terraform.tfvars
+terraform.tfvars
 tfplan
