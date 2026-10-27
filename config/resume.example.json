@@ -1,0 +1,36 @@
+{
+  "headline": "Backend Engineer (Node.js, TypeScript, AWS)",
+  "summary": "Backend engineer building APIs and serverless data pipelines.",
+  "yearsOfExperience": 5,
+  "location": "London, UK",
+  "workAuthorization": "UK, no sponsorship needed",
+  "languages": [{ "language": "English", "level": "C1" }, { "language": "Ukrainian", "level": "native" }],
+  "skills": {
+    "languages": ["TypeScript", "JavaScript", "SQL"],
+    "backend": ["Node.js", "NestJS", "REST", "GraphQL"],
+    "cloud": ["AWS Lambda", "DynamoDB", "S3", "Terraform"],
+    "databases": ["PostgreSQL", "Redis"],
+    "tools": ["GitHub Actions", "Docker"]
+  },
+  "experience": [
+    {
+      "title": "Backend Engineer",
+      "company": "Example Ltd",
+      "start": "2022-01",
+      "end": null,
+      "location": "London, UK",
+      "stack": ["Node.js", "TypeScript", "AWS", "PostgreSQL"],
+      "highlights": [
+        "Built a REST API used by 3 internal teams",
+        "Cut monthly AWS cost by 30% by moving batch jobs to Lambda"
+      ]
+    }
+  ],
+  "education": [{ "degree": "BSc Computer Science", "institution": "Example University", "year": "2019" }],
+  "preferences": {
+    "roles": ["Backend Engineer", "Platform Engineer"],
+    "seniority": "mid-senior",
+    "remote": true,
+    "locations": ["London"]
+  }
+}
