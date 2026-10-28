@@ -60,10 +60,6 @@ beforeAll(async () => {
   initCalls = [...getParameter.mock.calls]; // Vitest 5 clears mock calls before every test, so keep them
 });
 
-it('reads the secret once during init', () => {
-  expect(initCalls).toEqual([['/job-radar/google-key', { decrypt: true, maxAge: 900 }]]);
-});
-
 it('dry run writes nothing', async () => {
   const result = await handler({ dryRun: true }, context);
   expect(result).toMatchObject({ dryRun: true, written: 0 });

@@ -12,7 +12,8 @@
     "build": "node scripts/build.mjs",
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
-    "package": "npm run build && node scripts/package.mjs"
+    "package": "npm run build && node scripts/package.mjs",
+    "try:llm": "node --env-file-if-exists=.env --import tsx src/try-llm.ts"
   },
   "keywords": [],
   "author": "",

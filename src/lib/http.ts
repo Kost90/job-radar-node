@@ -1,80 +1,99 @@
-import { setTimeout as delay } from 'node:timers/promises';
-
 export class HttpError extends Error {
   constructor(
     readonly status: number,
-    readonly url: string,
+    readonly url: string, // already safe to log: callers pass a label instead of a URL that holds a secret
     readonly retryAfterMs?: number,
+    readonly body?: string, // first 500 chars of the error response: the API usually says what was wrong
   ) {
-    super(`HTTP ${status} error for URL: ${url}`);
+    super(`HTTP ${status} for ${url}${body ? `: ${body}` : ''}`);
     this.name = 'HttpError';
   }
 }
 
-export interface GetJsonOptions {
+export type FetchFn = typeof fetch;
+
+export interface RequestOptions {
   fetchFn?: FetchFn;
   timeoutMs?: number;
   signal?: AbortSignal;
   retries?: number; // extra attempts after the first one
   baseDelayMs?: number;
-  maxDelayMs?: number; // don't wait longer than this between attempts
+  headers?: Record<string, string>;
+  /** what errors and logs show instead of the URL (Telegram puts the bot token into the path) */
+  label?: string;
 }
 
-export type FetchFn = typeof fetch;
+export type GetJsonOptions = RequestOptions;
 
-export const sleep = (ms: number, signal?: AbortSignal): Promise<void> => delay(ms, undefined, { signal });
+/**
+ * Abortable sleep on the global setTimeout, so vi.useFakeTimers() can skip it in tests.
+ * (node:timers/promises is not faked by default: tests would really wait.)
+ */
+export function sleep(ms: number, signal?: AbortSignal): Promise<void> {
+  return new Promise((resolve, reject) => {
+    if (signal?.aborted) return reject(signal.reason);
+    const onAbort = () => {
+      clearTimeout(timer);
+      reject(signal?.reason);
+    };
+    const timer = setTimeout(() => {
+      signal?.removeEventListener('abort', onAbort);
+      resolve();
+    }, ms);
+    signal?.addEventListener('abort', onAbort, { once: true });
+  });
+}
 
-/** Retry only what can succeed next time: 408, 429, 5xx, network errors, our own timeout. */
+/** Retry only what can succeed next time: 408, 429, 5xx (Anthropic's 529 "overloaded" too), network errors, timeout. */
 export function isRetryable(err: unknown): boolean {
   if (err instanceof HttpError) return err.status === 408 || err.status === 429 || err.status >= 500;
   if (err instanceof Error) return err.name === 'TimeoutError' || err.name === 'TypeError';
   return false;
 }
 
-/** Retry-After is either seconds or an HTTP date. */
-export function parseRetryAfter(value: string | null, now = Date.now()): number | undefined {
-  if (!value) return undefined;
-  const seconds = Number(value);
-  if (Number.isFinite(seconds)) return seconds > 0 ? seconds * 1000 : undefined;
-  const at = Date.parse(value);
-  return Number.isNaN(at) || at <= now ? undefined : at - now;
-}
-
-export async function getJsonOnce(
-  url: string,
-  { fetchFn = fetch, timeoutMs = 15_000, signal }: GetJsonOptions = {},
-): Promise<unknown> {
+async function requestOnce(url: string, init: { method: string; body?: string }, options: RequestOptions) {
+  const { fetchFn = fetch, timeoutMs = 15_000, signal, headers = {}, label = url } = options;
   const timeout = AbortSignal.timeout(timeoutMs);
-
   const res = await fetchFn(url, {
-    headers: {
-      'user-agent': 'job-radar/0.1 (personal project)',
-      accept: 'application/json',
-    },
+    method: init.method,
+    body: init.body,
+    headers: { 'user-agent': 'job-radar/0.1 (personal project)', accept: 'application/json', ...headers },
     signal: signal ? AbortSignal.any([signal, timeout]) : timeout,
   });
-
   if (!res.ok) {
-    await res.body?.cancel().catch(() => {}); // free the connection
-    throw new HttpError(res.status, url, parseRetryAfter(res.headers.get('retry-after')));
+    const retryAfter = Number(res.headers.get('retry-after'));
+    // reading the text consumes the body, so the connection is freed: no cancel() needed
+    const body = (await res.text().catch(() => '')).slice(0, 500);
+    throw new HttpError(
+      res.status,
+      label,
+      Number.isFinite(retryAfter) && retryAfter > 0 ? retryAfter * 1000 : undefined,
+      body,
+    );
   }
-
-  return (await res.json()) as unknown;
+  return res.json() as Promise<unknown>;
 }
 
-export async function getJson(url: string, options: GetJsonOptions = {}): Promise<unknown> {
-  const { retries = 2, baseDelayMs = 500, maxDelayMs = 30_000 } = options;
+async function withRetry<T>(fn: () => Promise<T>, { retries = 2, baseDelayMs = 500, signal }: RequestOptions) {
   for (let attempt = 0; ; attempt++) {
     try {
-      return await getJsonOnce(url, options);
+      return await fn();
     } catch (err) {
-      if (attempt >= retries || !isRetryable(err) || options.signal?.aborted) throw err;
-
+      if (attempt >= retries || !isRetryable(err) || signal?.aborted) throw err;
+      // exponential backoff with "full jitter": random delay in [0, base * 2^attempt)
       const backoff = Math.random() * baseDelayMs * 2 ** attempt;
-      const wait = err instanceof HttpError && err.retryAfterMs ? Math.max(err.retryAfterMs, backoff) : backoff;
-      if (wait > maxDelayMs) throw err; // server asks us to wait too long: give up now
-
-      await sleep(wait, options.signal);
+      const waitMs = err instanceof HttpError && err.retryAfterMs ? Math.max(err.retryAfterMs, backoff) : backoff;
+      await sleep(waitMs, signal); // an aborted run stops waiting at once
     }
   }
+}
+
+export function getJson(url: string, options: RequestOptions = {}): Promise<unknown> {
+  return withRetry(() => requestOnce(url, { method: 'GET' }, options), options);
+}
+
+export function postJson(url: string, body: unknown, options: RequestOptions = {}): Promise<unknown> {
+  const headers = { 'content-type': 'application/json', ...options.headers };
+  const json = JSON.stringify(body);
+  return withRetry(() => requestOnce(url, { method: 'POST', body: json }, { ...options, headers }), options);
 }
