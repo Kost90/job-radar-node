@@ -229,7 +229,7 @@ data "aws_iam_policy_document" "apply" {
     }
   }
 
-   statement {
+  statement {
     sid = "AlarmTopic"
     actions = [
       "sns:CreateTopic",
@@ -266,7 +266,7 @@ data "aws_iam_policy_document" "apply" {
       "logs:DescribeLogGroups",
       "kms:DescribeKey",
       "kms:ListAliases",
-      "cloudwatch:DescribeAlarms", 
+      "cloudwatch:DescribeAlarms",
     ]
     resources = ["*"]
   }
