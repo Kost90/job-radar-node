@@ -13,3 +13,7 @@ output "log_group" {
 output "schedule" {
   value = "${aws_scheduler_schedule.daily.schedule_expression} ${aws_scheduler_schedule.daily.schedule_expression_timezone}"
 }
+
+output "alarm_topic_arn" {
+  value = aws_sns_topic.alarms.arn
+}

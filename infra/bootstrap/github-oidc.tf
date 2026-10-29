@@ -132,6 +132,12 @@ data "aws_iam_policy_document" "plan" {
       "iam:ListAttachedRolePolicies",
       "kms:DescribeKey",
       "kms:ListAliases",
+      "sns:GetTopicAttributes",
+      "sns:GetSubscriptionAttributes",
+      "sns:ListSubscriptionsByTopic",
+      "sns:ListTagsForResource",
+      "cloudwatch:DescribeAlarms",
+      "cloudwatch:ListTagsForResource",
     ]
     resources = ["*"]
   }
@@ -223,9 +229,45 @@ data "aws_iam_policy_document" "apply" {
     }
   }
 
+   statement {
+    sid = "AlarmTopic"
+    actions = [
+      "sns:CreateTopic",
+      "sns:DeleteTopic",
+      "sns:GetTopicAttributes",
+      "sns:SetTopicAttributes",
+      "sns:Subscribe",
+      "sns:Unsubscribe",
+      "sns:GetSubscriptionAttributes",
+      "sns:SetSubscriptionAttributes",
+      "sns:ListSubscriptionsByTopic",
+      "sns:ListTagsForResource",
+      "sns:TagResource",
+      "sns:UntagResource",
+    ]
+    resources = ["arn:aws:sns:${local.arn_prefix}:${var.project_name}*"]
+  }
+
   statement {
-    sid       = "AccountWideReads"
-    actions   = ["logs:DescribeLogGroups", "kms:DescribeKey", "kms:ListAliases"]
+    sid = "Alarms"
+    actions = [
+      "cloudwatch:PutMetricAlarm",
+      "cloudwatch:DeleteAlarms",
+      "cloudwatch:ListTagsForResource",
+      "cloudwatch:TagResource",
+      "cloudwatch:UntagResource",
+    ]
+    resources = ["arn:aws:cloudwatch:${local.arn_prefix}:alarm:${var.project_name}*"]
+  }
+
+  statement {
+    sid = "AccountWideReads"
+    actions = [
+      "logs:DescribeLogGroups",
+      "kms:DescribeKey",
+      "kms:ListAliases",
+      "cloudwatch:DescribeAlarms", 
+    ]
     resources = ["*"]
   }
 }
