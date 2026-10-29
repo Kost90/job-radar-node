@@ -12,3 +12,4 @@ infra/.build/
 infra/backend.hcl
 terraform.tfvars
 tfplan
+config/resume.json

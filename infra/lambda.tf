@@ -33,13 +33,18 @@ resource "aws_lambda_function" "this" {
   }
 
   environment {
-    variables = {
-      TABLE_NAME       = aws_dynamodb_table.seen.name
-      GOOGLE_KEY_PARAM = local.google_key_param
-      SPREADSHEET_ID   = var.spreadsheet_id
-      SHEET_NAME       = var.sheet_name
-      NODE_OPTIONS     = "--enable-source-maps"
-    }
+    variables = merge(
+      {
+        TABLE_NAME       = aws_dynamodb_table.seen.name
+        GOOGLE_KEY_PARAM = local.google_key_param
+        SPREADSHEET_ID   = var.spreadsheet_id
+        SHEET_NAME       = var.sheet_name
+        NODE_OPTIONS     = "--enable-source-maps"
+        LLM_MODEL        = var.llm_model
+        LLM_MAX_JOBS     = tostring(var.llm_max_jobs)
+      },
+      var.enable_ai_and_telegram ? local.ssm_params : {},
+    )
   }
 
   # the role must have its permissions before the first invocation, not just exist

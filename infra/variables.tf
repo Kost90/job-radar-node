@@ -66,3 +66,27 @@ variable "schedule_enabled" {
   type    = bool
   default = true
 }
+
+variable "enable_ai_and_telegram" {
+  description = "Pass the SSM parameter names of the Anthropic key, resume and Telegram bot to the function. Create the parameters first."
+  type        = bool
+  default     = true
+}
+
+variable "llm_model" {
+  type    = string
+  default = "claude-haiku-5-5"
+}
+
+variable "llm_max_jobs" {
+  description = "Upper bound of LLM calls for scoring per run: caps the daily spend"
+  type        = number
+  default     = 50
+}
+
+variable "alarm_email" {
+  description = "Where CloudWatch alarms are sent. Empty = no email subscription."
+  type        = string
+  default     = ""
+  sensitive   = true
+}

@@ -21,4 +21,10 @@ data "aws_kms_alias" "ssm" {
 locals {
   account_id       = data.aws_caller_identity.current.account_id
   google_key_param = "${var.ssm_prefix}google-key"
+  ssm_params = {
+    ANTHROPIC_KEY_PARAM  = "${var.ssm_prefix}anthropic-key"
+    RESUME_PARAM         = "${var.ssm_prefix}resume"
+    TELEGRAM_TOKEN_PARAM = "${var.ssm_prefix}telegram-token"
+    TELEGRAM_CHAT_PARAM  = "${var.ssm_prefix}telegram-chat-id"
+  }
 }
