@@ -1,6 +1,4 @@
 job-radar
-![deploy](https://github.com/Kost90/job-radar-node/actions/workflows/deploy.yml)
-![gitleaks](https://github.com/Kost90/job-radar-node/actions/workflows/gitleaks.yml)
 
 A daily serverless job radar: pulls postings from the public Greenhouse, Ashby and Workable APIs,
 filters them against my profile, asks Claude whether each new one fits my resume and whether the
