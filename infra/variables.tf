@@ -64,7 +64,7 @@ variable "schedule_timezone" {
 
 variable "schedule_enabled" {
   type    = bool
-  default = true
+  default = false
 }
 
 variable "enable_ai_and_telegram" {
