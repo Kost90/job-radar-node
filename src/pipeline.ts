@@ -80,7 +80,15 @@ export async function runPipeline(deps: PipelineDeps, { dryRun = false } = {}): 
     await deps.sink.append(fresh);
   } catch (err) {
     // not delivered = not seen, so the next run retries them
-    await deps.seen.release(fresh);
+    try {
+      await deps.seen.release(fresh);
+    } catch (releaseErr) {
+      // keep the sheet error, and say that some jobs stay claimed until their TTL expires
+      throw new AggregateError(
+        [err, releaseErr],
+        `sheet append failed (${message(err)}); release also failed, some jobs stay claimed: ${message(releaseErr)}`,
+      );
+    }
     throw err;
   }
 
