@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { matchJob } from '../src/filter.ts';
-import type { Profile } from '../src/profile.ts';
+import { type Profile, profile as realProfile } from '../src/profile.ts';
 import { makeJob } from './helpers.ts';
 
 const profile: Profile = {
@@ -32,5 +32,69 @@ describe('matchJob', () => {
 
   it('explains its decision', () => {
     expect(matchJob(makeJob({ title: 'Intern Backend' }), profile).reasons).toEqual(['excluded: intern']);
+  });
+
+  describe('whole-word keywords', () => {
+    const p: Profile = {
+      ...profile,
+      excludeTitleKeywords: ['intern', 'ios'],
+      skillKeywords: ['sql', 'typescript'],
+      minScore: 50,
+    };
+    const desc = 'We use TypeScript and SQL.';
+
+    it.each([
+      ['Backend Engineer, Internal Tools', true],
+      ['Backend Engineer Intern', false],
+      ['Intern, Backend Engineer', false],
+      ['Backend Engineer (Intern)', false],
+      ['Backend Engineer, Radios', true],
+      ['Backend Engineer iOS', false],
+    ] as const)('exclude: %s -> match=%s', (title, expected) => {
+      expect(matchJob(makeJob({ title, description: desc }), p).match).toBe(expected);
+    });
+
+    it.each([
+      ['Senior Node.js Developer', true],
+      // An unescaped "." would match any character here.
+      ['Senior Nodexjs Developer', false],
+    ] as const)('dot keyword: %s -> match=%s', (title, expected) => {
+      const withDot = { ...p, titleKeywords: ['node.js'] };
+      expect(matchJob(makeJob({ title, description: desc }), withDot).match).toBe(expected);
+    });
+
+    it('does not match sql inside nosql', () => {
+      expect(matchJob(makeJob({ description: 'We use NoSQL and Go.' }), p).match).toBe(false);
+    });
+
+    it('does not match uk inside another word', () => {
+      // "milwaukee" contains "uk" as a substring.
+      expect(matchJob(makeJob({ location: 'Milwaukee, WI', description: desc }), p).match).toBe(false);
+    });
+  });
+
+  describe('real profile config', () => {
+    const desc = 'Build REST APIs in TypeScript with ReactJS and NextJS.';
+
+    it.each([
+      'Backend Engineer Internship',
+      'Backend Engineer Interns',
+      'Software Engineer, Data Engineering',
+      'Software Engineer, QA Engineering',
+    ])('excludes %s', (title) => {
+      expect(matchJob(makeJob({ title, description: desc }), realProfile).match).toBe(false);
+    });
+
+    it('matches plural and glued skill variants', () => {
+      const result = matchJob(makeJob({ title: 'Backend Engineer', description: desc }), realProfile);
+      expect(result.reasons).toContain('skills: typescript, reactjs, nextjs, rest apis');
+      expect(result.match).toBe(true);
+    });
+
+    it('counts React.js as one skill', () => {
+      const result = matchJob(makeJob({ title: 'Backend Engineer', description: 'TypeScript, React.js' }), realProfile);
+      expect(result).toMatchObject({ score: 60, match: false });
+      expect(result.reasons).toContain('skills: typescript, react');
+    });
   });
 });

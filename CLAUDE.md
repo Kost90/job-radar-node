@@ -17,7 +17,7 @@ npm run build                   # esbuild bundle via scripts/build.mjs
 npm run package                 # build + zip for Lambda
 ```
 
-The dev script loads from `.env` (copy from `.env.example`). There are currently no test files in `src/` — `npm test` will run against node_modules only unless you add them.
+The dev script loads from `.env` (copy from `.env.example`). Tests are in `test/`.
 
 ## Architecture
 
@@ -74,6 +74,6 @@ Terraform in `infra/` (S3 state with native locking). `infra/bootstrap/` is one-
 
 ## Testing
 
-- Tests live in `src/**/*.test.ts` (vitest).
+- Tests live in the top-level `test/` folder as `test/*.test.ts` (vitest), not next to the source in `src/`. Shared helpers are in `test/helpers.ts`.
 - Stub external services through `PipelineDeps` and the `Llm` interface, not by mocking `fetch` globally.
 - Pure functions (`matchJob`, dedup) get table-driven tests.
