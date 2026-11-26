@@ -89,7 +89,13 @@ export function anthropic(opts: {
       // pick the block by type: a thinking block can come first
       const text = res.content.find((b) => b.type === 'text')?.text;
       if (text === undefined) throw new LlmError(`no text block, stop_reason=${res.stop_reason}`, usage);
-      return { data: JSON.parse(text), usage };
+      let data: unknown;
+      try {
+        data = JSON.parse(text);
+      } catch {
+        throw new LlmError('response was not valid JSON', usage);
+      }
+      return { data, usage };
     },
   };
 }

@@ -32,7 +32,7 @@ export function dynamoSeenStore(opts: {
   const limit = pLimit(concurrency);
 
   const release = async (jobs: ScoredJob[]) => {
-    await Promise.all(
+    const results = await Promise.allSettled(
       jobs.map(({ job }) =>
         limit(() =>
           client.send(
@@ -44,6 +44,10 @@ export function dynamoSeenStore(opts: {
         ),
       ),
     );
+    const failures = results.flatMap((r) => (r.status === 'rejected' ? [r.reason] : []));
+    if (failures.length > 0) {
+      throw new AggregateError(failures, `release: ${failures.length} of ${jobs.length} deletes failed`);
+    }
   };
 
   const claim = async (jobs: ScoredJob[]) => {
