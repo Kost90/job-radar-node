@@ -10,7 +10,12 @@ export interface MatchResult {
 const DAY_MS = 24 * 60 * 60 * 1000;
 const MAX_AGE_DAYS = 7;
 
-const has = (text: string, words: string[]) => words.filter((w) => text.includes(w.toLowerCase()));
+const escapeRegExp = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+// Keyword must not be glued to other letters/digits. Lookarounds (not \b) so
+// keywords like "node.js" or "back-end" still work.
+const has = (text: string, words: string[]) =>
+  words.filter((w) => new RegExp(`(?<![a-z0-9])${escapeRegExp(w.toLowerCase())}(?![a-z0-9])`).test(text));
 
 const reject = (reason: string): MatchResult => ({
   match: false,
